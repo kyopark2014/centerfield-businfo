@@ -10,7 +10,7 @@
 
 1) 사용자는 Web이나 Android/iOS App에서 제공되는 Restful API를 통해 원하는 버스의 도착 정보를 요청합니다. 
 
-2) API Gateway는 사용자의 요청을 받는 Endpoint로서 SSL을 이용한 보안을 지원하고 Amazon Lambda에서 event를 전달합니다. 
+2) API Gateway는 사용자의 요청을 받는 Endpoint로서, 보안을 위해 HTTPS 사용하고, Amazon Lambda로 event를 전달합니다. 
 
 3) Amazon Lambda는 경기버스에 제공하는 API를 활용하여 해당 버스의 도착 정보를 열람합니다. 
 
