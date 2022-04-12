@@ -1,0 +1,216 @@
+{
+  "version": "16.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "CdkStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "CdkStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "CdkStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "CdkStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6fc0de25bc84bffce403569a69807286c045e634357c9e7c941e724cdc0376cb.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "CdkStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "CdkStack.assets"
+      ],
+      "metadata": {
+        "/CdkStack/sns-centerfield/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "snscenterfield46086FE3"
+          }
+        ],
+        "/CdkStack/Centerfield-BusInfo": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "CenterfieldBusInfoA6A9C081"
+            }
+          }
+        ],
+        "/CdkStack/Centerfield-BusInfo/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CenterfieldBusInfoA6A9C081"
+          }
+        ],
+        "/CdkStack/lambdaGetLocation/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaGetLocationServiceRole8E9E8F54"
+          }
+        ],
+        "/CdkStack/lambdaGetLocation/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaGetLocationServiceRoleDefaultPolicyBB7F0B7F"
+          }
+        ],
+        "/CdkStack/lambdaGetLocation/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaGetLocation8AEF967B"
+          }
+        ],
+        "/CdkStack/lambdaGetLocation/InvokeServicePrincipal(apigateway.amazonaws.com)": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaGetLocationInvokeServicePrincipalapigatewayamazonawscomA976FE75"
+          }
+        ],
+        "/CdkStack/LambdaSlack/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaSlackServiceRole519A82E6"
+          }
+        ],
+        "/CdkStack/LambdaSlack/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaSlackA1FFF73E"
+          }
+        ],
+        "/CdkStack/LambdaSlack/AllowInvoke:CdkStacksnscenterfield17D362D4": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaSlackAllowInvokeCdkStacksnscenterfield17D362D48729122A"
+          }
+        ],
+        "/CdkStack/LambdaSlack/sns-centerfield/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaSlacksnscenterfield45100307"
+          }
+        ],
+        "/CdkStack/AccessLogs/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AccessLogs8B620ECA"
+          }
+        ],
+        "/CdkStack/AccessLogs/Policy/ResourcePolicy": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AccessLogsPolicyResourcePolicyA1E3EF94"
+          }
+        ],
+        "/CdkStack/api-centerfield/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfield7E54AC42"
+          }
+        ],
+        "/CdkStack/api-centerfield/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldCloudWatchRoleEE23F233"
+          }
+        ],
+        "/CdkStack/api-centerfield/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldAccount87569DF3"
+          }
+        ],
+        "/CdkStack/api-centerfield/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldDeploymentA2F5A2DE2fcefd6270ba9b56307f01bd1788410d"
+          }
+        ],
+        "/CdkStack/api-centerfield/DeploymentStage.dev/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldDeploymentStagedev4557BC74"
+          }
+        ],
+        "/CdkStack/api-centerfield/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldEndpointB5941826"
+          }
+        ],
+        "/CdkStack/api-centerfield/Default/getLocation/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldgetLocation01CFDE67"
+          }
+        ],
+        "/CdkStack/api-centerfield/Default/getLocation/GET/ApiPermission.CdkStackapicenterfield2F5A689E.GET..getLocation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldgetLocationGETApiPermissionCdkStackapicenterfield2F5A689EGETgetLocationB895B1A3"
+          }
+        ],
+        "/CdkStack/api-centerfield/Default/getLocation/GET/ApiPermission.Test.CdkStackapicenterfield2F5A689E.GET..getLocation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldgetLocationGETApiPermissionTestCdkStackapicenterfield2F5A689EGETgetLocation5A8DFF24"
+          }
+        ],
+        "/CdkStack/api-centerfield/Default/getLocation/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apicenterfieldgetLocationGET7DD9B9AD"
+          }
+        ],
+        "/CdkStack/apiUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "apiUrl"
+          }
+        ],
+        "/CdkStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/CdkStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/CdkStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/CdkStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "CdkStack"
+    }
+  }
+}
