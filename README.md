@@ -58,6 +58,17 @@ $ cdk destroy
 ## Lambda 함수의 구현 
 
 
+#### Lambda for getLocation
+
+Lambda for getLocation은 OpenaAPI를 이용하여 버스의 도착정보를 조회하고, DynamoDB에 저장하며, 조회한 결과를 Amazon SNS에 publish 하는 역할을 합니다. 
+
+https://github.com/kyopark2014/centerfield-businfo/tree/main/cdk/repositories/lambda-for-getLocation
+
+#### Lambda for slack
+
+Lambda for slack은 Amazon SNS을 subscribe하고 있다가, Lambda for getLocation에서 전달한 메시지를 Slack에 전달합니다. 
+
+https://github.com/kyopark2014/centerfield-businfo/tree/main/cdk/repositories/lambda-for-slack
 
 ## 테스트 방법 및 결과
 
