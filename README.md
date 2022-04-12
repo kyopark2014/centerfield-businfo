@@ -43,13 +43,13 @@ http://openapi.gbis.go.kr/ws/rest/busarrivalservice?serviceKey=1234567890&statio
 
 여기서는 AWS CDK를 이용하여 인프라를 쉽게 생성하고 삭제할 수 있습니다. [Cloud Development Kit (CDK) 구성](https://github.com/kyopark2014/centerfield-businfo/blob/main/cdk.md)을 참조하여, 필요한 AWS 서비스를 추가하거나 삭제합니다. 
 
-인프라 설치 방법
+#### 인프라 설치 방법
 
 ```c
 $ cdk synth
 $ cdk deploy
 ````
-인프라 삭제 방법
+#### 인프라 삭제 방법
 
 ```c
 $ cdk destroy
