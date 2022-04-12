@@ -39,6 +39,24 @@ http://openapi.gbis.go.kr/ws/rest/busarrivalservice?serviceKey=1234567890&statio
 
 ![image](https://user-images.githubusercontent.com/52392004/162734910-16d8b31f-3ffd-428d-85d4-ce63a818c040.png)
 
+## 인프라 구성
+
+여기서는 AWS CDK를 이용하여 인프라를 쉽게 생성하고 삭제할 수 있습니다. [Cloud Development Kit (CDK) 구성](https://github.com/kyopark2014/centerfield-businfo/blob/main/cdk.md)을 참조하여, 필요한 AWS 서비스를 추가하거나 삭제합니다. 
+
+인프라 설치 방법
+
+```c
+$ cdk synth
+$ cdk deploy
+````
+인프라 삭제 방법
+
+```c
+$ cdk destroy
+
+
+
+
 ## 테스트 방법 및 결과
 
 postman을 이용하여 아래와 같이 테스트 가능 합니다. 여기서 Method로 "GET"을 선택하고, URL은 api-gateway의 endpoint를 아래와 같이 입력합니다. 센터필드 정류장에서 1100 버스에 대한 정보를 베이스로 아래와 같이 Body에 입력합니다. 
