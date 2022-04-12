@@ -11,8 +11,11 @@
 http://openapi.gbis.go.kr/ws/rest/busarrivalservice?serviceKey=1234567890&stationId=122000202&routeId=222000074&staOrder=81
 
 센터필드 정류장: stationId=122000202
+
 검색하려는 노선 경로: routeId: routeID=222000074
-해당 노선에서 센터필드 정류장의 순번: staOrder: 81
+
+해당 노선에서 센터필드 정류장의 순번: staOrder=81
+
 
 상기 API를 통해 확인된 정보는 아래와 같습니다. "경기74아3257" 버스가 12분후에 도착예정이며, 현재 43개의 좌석이 비어 있습니다.
 
