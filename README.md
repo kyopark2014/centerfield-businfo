@@ -2,6 +2,12 @@
 
 여기서는 Amazon Lambda을 통해 경기버스에서 제공하는 OpenAPI로 Centerfiled의 Bus Station에 1100 버스가 도착하는 정보를 슬랙으로 알림을 받는 방법에 대해 설명하고자 합니다. 
 
+전체적인 Architecture는 아래와 같습니다.
+
+<img width="753" alt="image" src="https://user-images.githubusercontent.com/52392004/162922023-392a807f-2831-4821-84ba-8a9f3acd8a6b.png">
+
+
+
 ## 문제 요약
 
 [Centerfield 버스 도착 정보 조회](https://github.com/kyopark2014/centerfield-businfo/blob/main/businfo-openapi.md)에서 경기버스 1100이 센터필드 정류장을 지나갈때 도착 예정시간이나 버스에 대한 정보를 조회 할 수 있습니다. 
