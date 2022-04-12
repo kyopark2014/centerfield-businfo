@@ -53,7 +53,9 @@ $ cdk deploy
 
 ```c
 $ cdk destroy
+```
 
+## Lambda 함수의 구현 
 
 
 
