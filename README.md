@@ -32,7 +32,7 @@ http://openapi.gbis.go.kr/ws/rest/busarrivalservice?serviceKey=1234567890&statio
 
 센터필드 정류장: stationId=122000202
 
-검색하려는 노선 경로: routeId: routeID=222000074
+검색하려는 노선 경로: routeID=222000074
 
 해당 노선에서 센터필드 정류장의 순번: staOrder=81
 
