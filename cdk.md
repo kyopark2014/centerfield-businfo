@@ -161,3 +161,24 @@ API Gateway는 아래와 같이 설정할 수 있습니다.
       description: 'The url of API Gateway',
     });    
 ```
+
+## Troubleshoot: API Gateway 500에러
+
+AWS CDK로 인프라 설치 후 테스트시 API Gateway에서 500 에러가 발생하면, AWS Lamda를 invoke 이슈로 아래와 같이 재설정 합니다. 
+
+1) API Gateway Console에서 [Integration request[를 선택합니다. 
+
+<img width="1405" alt="image" src="https://user-images.githubusercontent.com/52392004/159109404-f5d3418c-dc73-40a2-93d5-2133307d8dc3.png">
+
+2) Lamda function에서 오른쪽 끝의 수정 버튼을 클릭합니다. 
+
+![noname](https://user-images.githubusercontent.com/52392004/159109490-c5ebc580-1eee-4ad7-9f1b-06448c5b70b7.png)
+
+3) 이후 수정없이 체크 버튼을 클릭 합니다. 
+
+![noname](https://user-images.githubusercontent.com/52392004/159109512-094fa66a-66d6-4f5f-b396-ca1134ff7f4d.png)
+
+4) 아래처럼 invite를 확인하는 팝업이 뜨면 OK를 선택합니다. 
+
+![noname](https://user-images.githubusercontent.com/52392004/159109549-21ce467b-f259-4f1a-8166-625fcd43f399.png)
+
