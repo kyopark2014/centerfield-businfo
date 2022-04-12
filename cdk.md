@@ -1,4 +1,4 @@
-# Cloud Development Kit (CDK)
+# Cloud Development Kit (CDK) 구성
 
 IaC(Infrastructure as Code)툴인 Amazon CDK를 이용하여 인프라를 설치하고 삭제할 수 있습니다. 여기서는 CDK V2를 기준으로 typescript를 이용합니다.
 
@@ -11,7 +11,7 @@ Amazon SNS은 아래와 같이 "sns-centerfield"라는 이름으로 topic을 구
     });
 ```
 
-DynamoDB는 "Centerfiedl-BusInfo"라는 이름으로 
+DynamoDB는 "Centerfiedl-BusInfo"라는 이름으로 생성하며, partition key로 버스번호(RouteNumber), short key로 생성시간(Timestamp)를 지정합니다. 
 
 ```java
   let tableName = 'Centerfield-BusInfo';
@@ -24,7 +24,8 @@ DynamoDB는 "Centerfiedl-BusInfo"라는 이름으로
     });
 ```
 
-Lambda for getLocation을 아래와 같이 정의 합니다. 
+Lambda for getLocation을 아래와 같이 정의 합니다. Lambda에서 Amazon SNS로 publish를 하기 위하여 environment에 topicArn을 저장하고, DynamoDB에 저장하기 위해 tableName도 전달합니다. 또한, DynamoDB에 대한 읽기/쓰기를 SNS에 대한 publish 권한을 줍니다. 
+
 ```java
   const lambdaGetLocation = new lambda.Function(this, "lambdaGetLocation", {
       runtime: lambda.Runtime.NODEJS_14_X, 
@@ -40,7 +41,8 @@ Lambda for getLocation을 아래와 같이 정의 합니다.
     topic.grantPublish(lambdaGetLocation);
 ```
 
-Lambda for slack을 아래와 같이 구현합니다. 
+Lambda for slack을 아래와 같이 구현합니다. slack API를 호출하기 위해서는 token을 전달하여야 하는데, 코드에 token이 포함되면 안되므로 아래와 같이 dummy값으로 초기 생성합니다. 이후 console에서 해당 lambda의 environment에 접속하여 slack에서 얻은 token 번호를 입력합니다. [slack에서 token 생성](https://github.com/kyopark2014/serverless-storytime/blob/main/docs/slackapp.md)은 slack에서 직접 수행하여야 합니다. 또한, Lambda for slack과 Amazon SNS 연결은 "addEventSource"를 이용해 아래처럼 수행합니다. 
+
 ```java
   const lambdaSlack = new lambda.Function(this, "LambdaSlack", {
       runtime: lambda.Runtime.NODEJS_14_X, 
@@ -54,6 +56,7 @@ Lambda for slack을 아래와 같이 구현합니다.
     lambdaSlack.addEventSource(new SnsEventSource(topic)); 
 ```
 
+API Gateway는 아래와 같이 설정할 수 있습니다. 
 
 ```java
     const logGroup = new logs.LogGroup(this, 'AccessLogs', {
@@ -157,3 +160,4 @@ Lambda for slack을 아래와 같이 구현합니다.
       value: api.url,
       description: 'The url of API Gateway',
     });    
+```
