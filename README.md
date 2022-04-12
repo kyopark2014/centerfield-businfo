@@ -99,3 +99,6 @@ postman을 이용하여 아래와 같이 테스트 가능 합니다. 여기서 M
 <img width="950" alt="image" src="https://user-images.githubusercontent.com/52392004/162950746-b39776da-9ae5-4015-ac3c-96b453c78d86.png">
 
 
+정상적으로 버스 도착 정보가 조회가 되면, Slack을 통해 아래와 같이 알림을 받을 수 있습니다. 
+
+![image](https://user-images.githubusercontent.com/52392004/162968091-ac5d7ef9-0141-44e7-99a5-9f4fef70ee05.png)
