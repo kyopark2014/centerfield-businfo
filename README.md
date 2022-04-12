@@ -56,13 +56,10 @@ postman을 이용하여 아래와 같이 테스트 가능 합니다. 여기서 M
 
 이때 headers는 아래와 같이 "Content-Type"으로 "application/json"을 설정합니다. 
 
-
-상기내용으로 설정후 실행한 결과는 아래와 같습니다. 여기서 "statusCode": 200이며, body에는 해당 버스에 대한 정보가 전달됩니다. 
-
 ![image](https://user-images.githubusercontent.com/52392004/162951310-07a69ae2-798f-469f-8c87-6cea1b1dbe9e.png)
 
 
-postman을 이용하여 아래와 같이 테스트 가능 합니다. 여기서 Method로 "GET"을 선택하고, URL은 api-gateway의 endpoint를 아래와 같이 입력합니다. 센터필드 정류장에서 1100 버스에 대한 정보를 베이스로 아래와 같이 Body에 입력합니다. 이때 headers에 
+실행한 결과는 아래와 같습니다. 여기서 "statusCode": 200이며, body에는 해당 버스에 대한 정보가 전달됩니다. 
 
 ![image](https://user-images.githubusercontent.com/52392004/162950933-49d43bda-d688-4736-84c9-4dde255292f0.png)
 
