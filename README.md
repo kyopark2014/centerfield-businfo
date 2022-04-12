@@ -1,6 +1,6 @@
-# centerfield-businfo
-It makes a slack notification for the station of the centerfield using open API.
+# Centerfield Bus Station의 버스 도착 정보를 알림으로 받기
 
+여기서는 Amazon Lambda을 통해 경기버스에서 제공하는 OpenAPI로 Centerfiled의 Bus Station에 1100 버스가 도착하는 정보를 슬랙으로 알림을 받는 방법에 대해 설명하고자 합니다. 
 
 ## 문제 요약
 
