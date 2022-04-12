@@ -6,7 +6,21 @@
 
 <img width="753" alt="image" src="https://user-images.githubusercontent.com/52392004/162922023-392a807f-2831-4821-84ba-8a9f3acd8a6b.png">
 
+사용 시나리오는 아래와 같습니다.
 
+1) 사용자는 Web이나 Android/iOS App에서 제공되는 Restful API를 통해 원하는 버스의 도착 정보를 요청합니다. 
+
+2) API Gateway는 사용자의 요청을 받는 Endpoint로서 SSL을 이용한 보안을 지원하고 Amazon Lambda에서 event를 전달합니다. 
+
+3) Amazon Lambda는 경기버스에 제공하는 API를 활용하여 해당 버스의 도착 정보를 열람합니다. 
+
+4) 확인된 버스의 정보는 추후 사용을 위해 DynamoDB에 저장합니다. 
+
+5) Amazon Lambda는 사용자에게 alarm을 보내기 위하여, Amazon SNS로 메시지를 전송합니다. 
+
+6) Amazon SNS는 미리 Subscribe된 Lambda for slack을 트리거합니다. 
+
+7) Lambda for slack은 slack으로 메시지 전송을 요청합니다. 
 
 ## 문제 요약
 
