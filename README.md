@@ -1,6 +1,6 @@
 # Centerfield Bus Station의 버스 도착 정보를 알림으로 받기
 
-본 Github에서는 Amazon Severless를 이용하여 Centerfiled Bus Station의 "1100"번 버스에 대한 도착정보를 조회하여 알림의 형태로 슬랙으로 전달하는 모든 동작을 코드와 함께 설명합니다. AWS Serverless는 scalable하여 변화하는 트래픽을 잘 처리 할 수 있으며, 개발 및 유지보수 면에서 유연한 구성을 할 수 있습니다. 
+본 Github에서는 Amazon Severless를 이용하여 Centerfiled Bus Station의 "1100"번 버스에 대한 도착정보를 조회하여 알림의 형태로 슬랙으로 전달하는 모든 동작을 코드와 함께 설명합니다. AWS Serverless는 scalable하여 변화하는 트래픽을 잘 처리 할 수 있으며, 빠른 개발 및 유연한 유지보수 면에서 많은 장점을 가지고 있습니다.
 
 전체적인 Architecture는 아래와 같습니다. Serverless인 Amazon API Gateway, Lambda, SNS, DynamoDB로 구성되며, 인프라는 IaC인 AWS CDK를 통해 구현됩니다. 또한, 로그분석은 Amazon CloudWatch를 이용합니다. 
 
