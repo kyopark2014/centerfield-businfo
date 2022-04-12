@@ -20,7 +20,7 @@
 
 7) Lambda for slack은 slack으로 메시지 전송을 요청합니다. 
 
-## 문제 요약
+## Specific Operation 
 
 [Centerfield 버스 도착 정보 조회](https://github.com/kyopark2014/centerfield-businfo/blob/main/businfo-openapi.md)에서 경기버스 1100이 센터필드 정류장을 지나갈때 도착 예정시간이나 버스에 대한 정보를 조회 할 수 있습니다. 
 
