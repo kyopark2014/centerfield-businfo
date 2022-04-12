@@ -2,9 +2,9 @@
 
 여기서는 Amazon Lambda을 통해 경기버스에서 제공하는 OpenAPI로 Centerfiled의 Bus Station에 1100 버스가 도착하는 정보를 슬랙으로 알림을 받는 방법에 대해 설명하고자 합니다. 
 
-전체적인 Architecture는 아래와 같습니다.
+전체적인 Architecture는 아래와 같습니다. Serverless Architecture로 구성되며, 인프라는 IaC인 AWS CDK를 통해 구현되며, 로그분석은 Amazon CloudWatch를 이용합니다. 
 
-<img width="753" alt="image" src="https://user-images.githubusercontent.com/52392004/162922023-392a807f-2831-4821-84ba-8a9f3acd8a6b.png">
+<img width="751" alt="image" src="https://user-images.githubusercontent.com/52392004/162953097-2dbc5e93-2b89-4734-b741-33bafb7e4204.png">
 
 사용 시나리오는 아래와 같습니다.
 
