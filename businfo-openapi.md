@@ -1,5 +1,5 @@
 
-# Centerfield 버스 도착 정보 조회 및 저장
+# Centerfield 버스 도착 정보 조회
 
 ## 경기버스 API
 
