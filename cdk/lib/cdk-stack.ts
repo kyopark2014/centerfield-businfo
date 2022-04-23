@@ -1,4 +1,4 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+/*import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as cdk from 'aws-cdk-lib';
 
@@ -8,7 +8,19 @@ const lambda = require('aws-cdk-lib/aws-lambda');
 const apiGateway = require('aws-cdk-lib/aws-apigateway');
 const dynamodb = require('aws-cdk-lib/aws-dynamodb');
 const iam = require('aws-cdk-lib/aws-iam');
-const logs = require('aws-cdk-lib/aws-logs');
+const logs = require('aws-cdk-lib/aws-logs'); */
+
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as cdk from 'aws-cdk-lib';
+
+import {SnsEventSource} from "aws-cdk-lib/aws-lambda-event-sources";
+import * as sns from "aws-cdk-lib/aws-sns";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as apiGateway from "aws-cdk-lib/aws-apigateway";
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
+import * as iam from "aws-cdk-lib/aws-iam";
+import * as logs from "aws-cdk-lib/aws-logs"; 
 
 const stage = "dev";
 
@@ -42,8 +54,13 @@ export class CdkStack extends Stack {
         tableName: tableName
       }
     });  
+    // grent permission
     dataTable.grantReadWriteData(lambdaGetLocation);
     topic.grantPublish(lambdaGetLocation);
+    new cdk.CfnOutput(this, 'lambda-arn', {
+      value: lambdaGetLocation.functionArn,
+      description: 'The url of lambda function arn',
+    }); 
 
     // Lambda - Slack
     const lambdaSlack = new lambda.Function(this, "LambdaSlack", {
@@ -82,10 +99,11 @@ export class CdkStack extends Stack {
           user: true
         }),
       },
-      proxy: false
+      // proxy: false
     });   
 
     lambdaGetLocation.grantInvoke(new iam.ServicePrincipal('apigateway.amazonaws.com'));
+    //lambdaGetLocation.grantInvoke(new iam.AnyPrincipal());
 
     const templateString: string = `##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html
     ##  This template will pass through all parameters including path, querystring, header, stage variables, and context through to the integration endpoint via the body/payload
@@ -131,15 +149,42 @@ export class CdkStack extends Stack {
         "resource-path" : "$context.resourcePath"
         }
     }`
-
     const requestTemplates = { // path through
       "application/json" : templateString
     }
 
+    // Lambda Invoke Role
+    const invokeRole = new iam.Role(this, 'LambdaInvokeRole', {
+      assumedBy: new iam.ServicePrincipal('apigateway.amazonaws.com'),
+      description: 'Role to invoke lambda',
+    });
+    invokeRole.assumeRolePolicy?.addStatements(
+      new iam.PolicyStatement({
+        actions: ['sts:AssumeRole'],
+        effect: iam.Effect.ALLOW,
+        principals: [new iam.ServicePrincipal('lambda.amazonaws.com')]
+      })
+    )
+    invokeRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [
+        "lambda:InvokeFunction", 
+        "lambda:GetFunctionConfiguration", 
+        "logs:*"
+      ],
+      resources: [lambdaGetLocation.functionArn],
+    })); 
+    new cdk.CfnOutput(this, 'InvokeRoleArn', {
+      value: invokeRole.roleArn,
+      description: 'The arn of invoke role',
+    });    
+
+    // define getLocation api
     const getLocation = api.root.addResource('getLocation');
     getLocation.addMethod('GET', new apiGateway.LambdaIntegration(lambdaGetLocation, {
-      PassthroughBehavior: apiGateway.PassthroughBehavior.WHEN_NO_TEMPLATES,
+      passthroughBehavior: apiGateway.PassthroughBehavior.WHEN_NO_TEMPLATES,
       requestTemplates: requestTemplates,
+      credentialsRole: invokeRole,
       integrationResponses: [{
         statusCode: '200',
       }], 
@@ -154,7 +199,7 @@ export class CdkStack extends Stack {
         }
       ]
     }); 
-    
+
     new cdk.CfnOutput(this, 'apiUrl', {
       value: api.url,
       description: 'The url of API Gateway',

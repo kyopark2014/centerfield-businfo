@@ -304,6 +304,14 @@
               "version": "2.17.0"
             }
           },
+          "lambda-arn": {
+            "id": "lambda-arn",
+            "path": "CdkStack/lambda-arn",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.17.0"
+            }
+          },
           "LambdaSlack": {
             "id": "LambdaSlack",
             "path": "CdkStack/LambdaSlack",
@@ -687,7 +695,7 @@
                           "format": "{\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"user\":\"$context.identity.user\",\"requestTime\":\"$context.requestTime\",\"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\",\"status\":\"$context.status\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"
                         },
                         "deploymentId": {
-                          "Ref": "apicenterfieldDeploymentA2F5A2DE2fcefd6270ba9b56307f01bd1788410d"
+                          "Ref": "apicenterfieldDeploymentA2F5A2DE8276dc55ebf2e1d80472fdfd8ab84334"
                         },
                         "stageName": "dev"
                       }
@@ -883,11 +891,18 @@
                                   "requestTemplates": {
                                     "application/json": "##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html\n    ##  This template will pass through all parameters including path, querystring, header, stage variables, and context through to the integration endpoint via the body/payload\n    #set($allParams = $input.params())\n    {\n    \"body-json\" : $input.json('$'),\n    \"params\" : {\n    #foreach($type in $allParams.keySet())\n        #set($params = $allParams.get($type))\n    \"$type\" : {\n        #foreach($paramName in $params.keySet())\n        \"$paramName\" : \"$util.escapeJavaScript($params.get($paramName))\"\n            #if($foreach.hasNext),#end\n        #end\n    }\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"stage-variables\" : {\n    #foreach($key in $stageVariables.keySet())\n    \"$key\" : \"$util.escapeJavaScript($stageVariables.get($key))\"\n        #if($foreach.hasNext),#end\n    #end\n    },\n    \"context\" : {\n        \"account-id\" : \"$context.identity.accountId\",\n        \"api-id\" : \"$context.apiId\",\n        \"api-key\" : \"$context.identity.apiKey\",\n        \"authorizer-principal-id\" : \"$context.authorizer.principalId\",\n        \"caller\" : \"$context.identity.caller\",\n        \"cognito-authentication-provider\" : \"$context.identity.cognitoAuthenticationProvider\",\n        \"cognito-authentication-type\" : \"$context.identity.cognitoAuthenticationType\",\n        \"cognito-identity-id\" : \"$context.identity.cognitoIdentityId\",\n        \"cognito-identity-pool-id\" : \"$context.identity.cognitoIdentityPoolId\",\n        \"http-method\" : \"$context.httpMethod\",\n        \"stage\" : \"$context.stage\",\n        \"source-ip\" : \"$context.identity.sourceIp\",\n        \"user\" : \"$context.identity.user\",\n        \"user-agent\" : \"$context.identity.userAgent\",\n        \"user-arn\" : \"$context.identity.userArn\",\n        \"request-id\" : \"$context.requestId\",\n        \"resource-id\" : \"$context.resourceId\",\n        \"resource-path\" : \"$context.resourcePath\"\n        }\n    }"
                                   },
+                                  "passthroughBehavior": "WHEN_NO_TEMPLATES",
                                   "integrationResponses": [
                                     {
                                       "statusCode": "200"
                                     }
-                                  ]
+                                  ],
+                                  "credentials": {
+                                    "Fn::GetAtt": [
+                                      "LambdaInvokeRole0342EAD8",
+                                      "Arn"
+                                    ]
+                                  }
                                 },
                                 "methodResponses": [
                                   {
@@ -925,6 +940,105 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_apigateway.RestApi",
+              "version": "2.17.0"
+            }
+          },
+          "LambdaInvokeRole": {
+            "id": "LambdaInvokeRole",
+            "path": "CdkStack/LambdaInvokeRole",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkStack/LambdaInvokeRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "apigateway.amazonaws.com"
+                          }
+                        },
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "Role to invoke lambda"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.17.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "CdkStack/LambdaInvokeRole/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkStack/LambdaInvokeRole/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "lambda:InvokeFunction",
+                                "lambda:GetFunctionConfiguration",
+                                "logs:*"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Fn::GetAtt": [
+                                  "lambdaGetLocation8AEF967B",
+                                  "Arn"
+                                ]
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "LambdaInvokeRoleDefaultPolicyDE53A8A0",
+                        "roles": [
+                          {
+                            "Ref": "LambdaInvokeRole0342EAD8"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.17.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.17.0"
+            }
+          },
+          "InvokeRoleArn": {
+            "id": "InvokeRoleArn",
+            "path": "CdkStack/InvokeRoleArn",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
               "version": "2.17.0"
             }
           },

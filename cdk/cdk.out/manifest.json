@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6fc0de25bc84bffce403569a69807286c045e634357c9e7c941e724cdc0376cb.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a575e8d5dcc1ba6324382f75a3aa617e0fdc9bfee18e11dfb7534c6244d4c5a3.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -83,6 +83,12 @@
             "data": "lambdaGetLocationInvokeServicePrincipalapigatewayamazonawscomA976FE75"
           }
         ],
+        "/CdkStack/lambda-arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "lambdaarn"
+          }
+        ],
         "/CdkStack/LambdaSlack/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -140,7 +146,7 @@
         "/CdkStack/api-centerfield/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "apicenterfieldDeploymentA2F5A2DE2fcefd6270ba9b56307f01bd1788410d"
+            "data": "apicenterfieldDeploymentA2F5A2DE8276dc55ebf2e1d80472fdfd8ab84334"
           }
         ],
         "/CdkStack/api-centerfield/DeploymentStage.dev/Resource": [
@@ -177,6 +183,24 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "apicenterfieldgetLocationGET7DD9B9AD"
+          }
+        ],
+        "/CdkStack/LambdaInvokeRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaInvokeRole0342EAD8"
+          }
+        ],
+        "/CdkStack/LambdaInvokeRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaInvokeRoleDefaultPolicyDE53A8A0"
+          }
+        ],
+        "/CdkStack/InvokeRoleArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InvokeRoleArn"
           }
         ],
         "/CdkStack/apiUrl": [
