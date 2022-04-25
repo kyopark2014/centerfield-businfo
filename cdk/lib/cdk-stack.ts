@@ -1,15 +1,3 @@
-/*import { Stack, StackProps } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-import * as cdk from 'aws-cdk-lib';
-
-const {SnsEventSource} = require('aws-cdk-lib/aws-lambda-event-sources');
-const sns = require('aws-cdk-lib/aws-sns');
-const lambda = require('aws-cdk-lib/aws-lambda');
-const apiGateway = require('aws-cdk-lib/aws-apigateway');
-const dynamodb = require('aws-cdk-lib/aws-dynamodb');
-const iam = require('aws-cdk-lib/aws-iam');
-const logs = require('aws-cdk-lib/aws-logs'); */
-
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as cdk from 'aws-cdk-lib';
