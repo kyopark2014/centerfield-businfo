@@ -42,7 +42,7 @@ export class CdkStack extends Stack {
         tableName: tableName
       }
     });  
-    // grent permission
+    // grant permission
     dataTable.grantReadWriteData(lambdaGetLocation);
     topic.grantPublish(lambdaGetLocation);
     new cdk.CfnOutput(this, 'lambda-arn', {
