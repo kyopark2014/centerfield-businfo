@@ -87,12 +87,10 @@ export class CdkStack extends Stack {
           user: true
         }),
       },
-      // proxy: false
     });   
 
     lambdaGetLocation.grantInvoke(new iam.ServicePrincipal('apigateway.amazonaws.com'));
-    //lambdaGetLocation.grantInvoke(new iam.AnyPrincipal());
-
+    
     const templateString: string = `##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html
     ##  This template will pass through all parameters including path, querystring, header, stage variables, and context through to the integration endpoint via the body/payload
     #set($allParams = $input.params())
