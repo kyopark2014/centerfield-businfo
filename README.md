@@ -5,7 +5,7 @@
 전체적인 Architecture는 아래와 같습니다. Serverless인 Amazon API Gateway, Lambda, SNS, DynamoDB로 구성되며, 인프라는 IaC인 AWS CDK를 통해 구현됩니다. 또한, 로그분석은 Amazon CloudWatch를 이용합니다.  
 
 <img width="754" alt="image" src="https://user-images.githubusercontent.com/52392004/162966207-e55d204c-4cee-44bc-8202-30a7be7c8008.png">
-
+  
 사용 시나리오는 아래와 같습니다.
 
 1) 사용자는 Web이나 Android/iOS App에서 제공되는 Restful API를 통해 원하는 버스의 도착 정보를 요청합니다. 
